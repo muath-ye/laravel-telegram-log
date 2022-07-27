@@ -1,27 +1,16 @@
 {
-    "name": "yemeni-open-source/laravel-wallet",
-    "description": "Laravel wallet is a package with expressive pronounced syntax that provide top-notch development covering deposits, withdrawals, transactions and balances all quite simply.",
+    "name": "yemeni-open-source/laravel-telegram-log",
+    "description": "Laravel telegram log is a package that can catch your logs all quite simply.",
     "keywords": [
         "yemeni-open-source",
-        "laravel-wallet",
-        "virtual",
-        "currency",
-        "credits",
-        "wallet",
-        "payment"
+        "laravel-telegram-log",
+        "logging"
     ],
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "YemeniOpenSource\\LaravelWallet\\": "src/",
-            "Database\\Seeders\\": "database/seeders/",
-            "YemeniOpenSource\\LaravelWallet\\Database\\Factories\\": "database/factories"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "YemeniOpenSource\\LaravelWallet\\Tests\\": "tests"
+            "YemeniOpenSource\\TelegramLog\\": "src/"
         }
     },
     "authors": [
@@ -33,20 +22,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "YemeniOpenSource\\LaravelWallet\\WalletServiceProvider"
-            ],
-            "aliases": {
-                "Wallet": "YemeniOpenSource\\LaravelWallet\\Facades\\WalletFacade"
-            }
+                "YemeniOpenSource\\TelegramLog\\TelegramLogServiceProvider"
+            ]
         }
     },
-    "scripts": {
-        "test": "vendor/bin/phpunit tests --colors=always --verbose --testdox",
-        "test-f": "vendor/bin/phpunit --colors=always --verbose --testdox --filter"
-    },
     "require-dev": {
-        "illuminate/testing": "^8.83",
-        "phpunit/phpunit": "^9.5",
         "orchestra/testbench": "^6.24"
     }
 }

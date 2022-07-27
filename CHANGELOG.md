@@ -1,3 +1,3 @@
 # Changelog
 
-All releases of `yemeni-open-source\laravel-wallet` will be announced here.
+All releases of `yemeni-open-source\laravel-telegram-log` will be announced here.

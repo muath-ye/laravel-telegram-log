@@ -1,17 +1,17 @@
-![Laravel Wallet](./images/yos-laravel-wallet.svg)
+![Laravel Wallet](./images/yos-laravel-telegram-log.svg)
 
 <div style="text-align: center;">
 
-[![Laravel Unit Test](https://github.com/Yemeni-Open-Source/laravel-wallet/actions/workflows/laravel-unit-test.yml/badge.svg)](https://github.com/Yemeni-Open-Source/laravel-wallet/actions/workflows/laravel-unit-test.yml)
-![Packagist Downloads](https://img.shields.io/packagist/dt/Yemeni-Open-Source/laravel-wallet?color=blue&label=Downloads&logo=packagist&logoColor=white)
-![Packagist Version](https://img.shields.io/packagist/v/Yemeni-Open-Source/laravel-wallet?color=green&label=Version&logo=laravel&logoColor=white)
-![GitHub](https://img.shields.io/github/license/Yemeni-Open-Source/laravel-wallet?logo=Open%20Source%20Initiative&label=License&logoColor=white&color=blueviolet)
+[![Laravel Unit Test](https://github.com/Yemeni-Open-Source/laravel-telegram-log/actions/workflows/laravel-unit-test.yml/badge.svg)](https://github.com/Yemeni-Open-Source/laravel-telegram-log/actions/workflows/laravel-unit-test.yml)
+![Packagist Downloads](https://img.shields.io/packagist/dt/Yemeni-Open-Source/laravel-telegram-log?color=blue&label=Downloads&logo=packagist&logoColor=white)
+![Packagist Version](https://img.shields.io/packagist/v/Yemeni-Open-Source/laravel-telegram-log?color=green&label=Version&logo=laravel&logoColor=white)
+![GitHub](https://img.shields.io/github/license/Yemeni-Open-Source/laravel-telegram-log?logo=Open%20Source%20Initiative&label=License&logoColor=white&color=blueviolet)
 
 </div>
 
-# Laravel Wallet
+# Laravel Telegram log
 
-Laravel wallet is a package with expressive pronounced syntax that provide top-notch development covering deposits, withdrawals, transactions and balances all quite simply.
+Laravel telegram log is a package that can catch your logs all quite simply.
 
 ## Requirments
 
@@ -27,82 +27,58 @@ This package is tested with Laravel v8 it my not work on Laravel v7 or v6 or v5
 
 Install the package by using composer:
 
-> ```composer require yemeni-open-source/laravel-wallet```
+> ```composer require yemeni-open-source/laravel-telegram-log```
 
 ## Configure Your Needs
 
-You can scape this step if you want to use default configuration, but you can publish wallet configuration by running:
+You can scape this step if you want to use default configuration, but you can publish telegram logs configuration by running:
 
-> ```php artisan vendor:publish --provider="YemeniOpenSource\LaravelWallet\WalletServiceProvider" --tag=config```
+> ```php artisan vendor:publish --provider="YemeniOpenSource\TelegramLog\TelegramLogServiceProvider" --tag=config```
 
-This will merge the ```config/wallet.php``` config file to your root ```config``` directory. You are free to modify it before migrating the database.
-## Database Migrations
-
-After successfull installation migrate the wallet tables
-
-> ```php artisan migrate```
-
-If you want to add your customization, publish the migrations:
-
-> ```php artisan vendor:publish --provider="YemeniOpenSource\LaravelWallet\WalletServiceProvider" --tag=migrations```
-
-Laravel will use the publish migrations at ```database/migrations```.
+This will merge the ```config/telegramlog.php``` config file to your root ```config``` directory. You are free to modify it.
 
 ## Setup
 
-Add the ```HasWallet``` trait to any model which you want to add wallet functionality, for example ```User``` model.
+### Create Telegram bot
 
-```php
-use YemeniOpenSource\LaravelWallet\Traits\HasWallet;
+Create new telegram bot as following steps:
 
-class User extends Model
-{
-    use HasWallet;
+- visit [@BotFather](https://telegram.me/BotFather)
+- send ```/newbot``` to the [@BotFather](https://telegram.me/BotFather) chat.
+- replay with the name of your new bot.
+- then replay with the username for your bot.
+- copy your bot **token**.
 
-    ...
-}
+### Open New Chat with your created bot
+
+- visit [t.me/username_of_your_bot](http://t.me/username_of_your_bot)
+- send ```Hi``` or any text message.
+- visit [https://api.telegram.org/bot<**YourBOTToken**>/getUpdates](https://api.telegram.org/bot<YourBOTToken>/getUpdates)
+- copy your **```id```** which inside ```chat``` object.
+
+### Update your .env file
+
+```env
+LOG_CHANNEL=telegram
+TELEGRAM_LOGGER_BOT_TOKEN=<your-bot-api-token>
+TELEGRAM_LOGGER_CHAT_ID=<your-bot-chat-id>
 ```
 
-## Basic Usage
+### Add Telegram Log Channel
 
-You can create wallet and transactions for your ```User``` model as an example mentioned above.
-
-```php
-
-// The wallet balance initially will be [0]
-$user = User::first();
-$user->wallet->balance; // 0
-
-// This will add to the wallet balance as passed amount.
-$user->wallet->deposit(643.646);
-$user->wallet->balance; // 643.6460
-
-// This will subtract from the wallet balance as passed amount.
-$user->wallet->withdraw(168.545);
-$user->wallet->balance; // 475.1010
-
-// It will throw [UnacceptedTransactionException] exception if passed amount greater wallet balance 
-$user->wallet->withdraw(500);
-$user->wallet->balance; // UnacceptedTransactionException
-
-// If you want to force withdraw, use [forceWithdraw]
-$user->wallet->forceWithdraw(500);
-$user->wallet->balance; // -24.8990
-```
-
-## Advanced Usage
-
-You can easily add meta information to the transactions to suit your needs.
+- Add the ```telegram``` logging channel to your ```config/logging.php```.
 
 ```php
-$user = User::first();
-$user->wallet->deposit(100, ['currency' => 'USD', 'bank' => 'TEST BANK']);
-$user->wallet->withdraw(64, ['currency' => 'USD', 'description' => 'Purchase of Item #101']);
+'channels' => [
+    // ...
+    'telegram' => [
+        'driver' => 'custom',
+        'via' => YemeniOpenSource\Services\TelegramService::class,
+        'level' => 'debug',
+    ],
+    // ...
+],
 ```
-
-## Credits
-
-[Digital money vector created by fullvector - www.freepik.com](https://www.freepik.com/vectors/digital-money)
 
 ## Credits
 

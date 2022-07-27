@@ -1,49 +1,19 @@
 <?php
 
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Prefix
-    |--------------------------------------------------------------------------
-    |
-    | This value is the prefix value of your wallet tables. This value should
-    | changed before migrating the database. Laravel Wallet models uses this 
-    | prefix.
-    |
-    */
-    'prefix' => 'lw_',
+    // Telegram logger bot token
+    'token' => env('TELEGRAM_LOGGER_BOT_TOKEN'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Added Transactions
-    |--------------------------------------------------------------------------
-    |
-    | This value is for transaction types that are added from the wallet
-    | balance. All amounts will be converted to a positive value.
-    |
-    */
-    'adding_transaction_types' => ['deposit', 'refund'],
+    // Telegram chat id
+    'chat_id' => env('TELEGRAM_LOGGER_CHAT_ID'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Added Transactions
-    |--------------------------------------------------------------------------
-    |
-    | This value is for transaction types that are subtracted from the wallet
-    | balance. All amounts will be converted to a negative value.
-    |
-    */
-    'subtracting_transaction_types' => ['withdraw', 'payout'],
+    // Blade Template to use formatting logs
+    'template' => env('TELEGRAM_LOGGER_TEMPLATE', 'laravel-telegram-logging::standard'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Activate automatic recalculation
-    |--------------------------------------------------------------------------
-    |
-    | This value is to activate recalculation of the wallet balance job which
-    | will recalculate the balance of the wallet from the transaction history
-    | after wallet balance has changed to ensure correct value.
-    |
-    */
-    'auto_recalculate_balance' => env('WALLET_AUTO_RECALCULATE_BALANCE', false),
+    // Telegram sendMessage options: https://core.telegram.org/bots/api#sendmessage
+    'options' => [
+        // 'parse_mode' => 'html',
+        // 'disable_web_page_preview' => true,
+        // 'disable_notification' => false
+    ],
 ];
