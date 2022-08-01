@@ -1,4 +1,4 @@
-![Laravel Wallet](./images/yos-laravel-telegram-log.svg)
+![Laravel Telegram Log](./images/yos-laravel-telegram-log.svg)
 
 <div style="text-align: center;">
 
