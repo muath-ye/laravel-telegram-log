@@ -2,7 +2,6 @@
 
 <div style="text-align: center;">
 
-[![Laravel Unit Test](https://github.com/Yemeni-Open-Source/laravel-telegram-log/actions/workflows/laravel-unit-test.yml/badge.svg)](https://github.com/Yemeni-Open-Source/laravel-telegram-log/actions/workflows/laravel-unit-test.yml)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/Yemeni-Open-Source/laravel-telegram-log?color=blue&label=Downloads&logo=packagist&logoColor=white)
 ![Packagist Version](https://img.shields.io/packagist/v/Yemeni-Open-Source/laravel-telegram-log?color=green&label=Version&logo=laravel&logoColor=white)
 ![GitHub](https://img.shields.io/github/license/Yemeni-Open-Source/laravel-telegram-log?logo=Open%20Source%20Initiative&label=License&logoColor=white&color=blueviolet)
